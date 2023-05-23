@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="marksheet2.css">
+    <script>
+    function res(){
+    var studentName = document.getElementById("name").value;
+    var flag=true;
+
+    var marks=[parseInt(document.getElementById("phy").value),parseInt(document.getElementById("che").value),parseInt(document.getElementById("math").value),parseInt(document.getElementById("hin").value),parseInt(document.getElementById("eng").value)];
+
+    var subject=["Physics ","Chemistry ","Maths ","Hindi ","English "];
+
+    var total=0;
+    var count=0;
+    var gm=0;
+    var sub="";
+    var message="";
+    var dist="";
+    var index=0;
+    var per=0;
+    var dist="";
+
+    for(var mark of marks)
+    {
+        total=total+mark;
+        
+        if(mark<0||mark>100)
+        {
+            message="Total marks should be in between 0 to 100";
+            flag=false;
+            break;
+        }
+        else
+        {
+            if(mark<33)
+            {
+                gm=mark;
+                sub=sub+subject[index];
+                count++;
+            }
+            if(mark>=75)
+                {
+                    dist=dist+subject[index];
+                }
+        }
+        index++;
+    }
+    if(flag)
+    {
+
+    if(count==0||(count==1 && gm>=28))
+    {
+        if(count==1)
+        {
+            per=(total+33-gm)/5;
+            message="Pass with grace and grace marks is:- "+(33-gm)+"<br> "+"Grace subject is:- "+sub+"<br>"
+        }
+        else
+        {
+            per=total/5;
+            message="Pass"+" ";
+        }
+        if(per>=33 && per<45)
+        {
+            message=message+"with third division:-"+per+"%";
+        }
+        else if(per<60)
+        {
+            message=message+"with second division:-"+per+"%";
+        }
+        else
+        {
+            message=message+"with first division:-"+per+"%";
+        }
+        if(dist!="")
+        {
+            message=message+"<br>Distinction subject:-"+dist;
+        }
+    }
+        else if(count==1)
+        {
+            message="Supplementary in subject"+sub;
+        }
+        else
+        {
+            message="Fail in subject:- "+sub;
+        }
+        
+    }
+    document.getElementById("studentName").innerHTML = "Student Name: " + studentName;
+    document.getElementById("result").innerHTML=message;  
+}
+</script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="marksheet">
+        <div id="head">
+            <h2>Shri Govindram Sakseriya Institute</h2>
+            <h3>Higher Secondary School Result-2022-23</h3>
+        </div>
+        <div id="logo">
+            <img src="logo.jpg">
+        </div>
+
+        <div>
+        <table>
+           
+            <tr><th>ENTER STUDENT NAME</th><td>
+            <input type="text"placeholder="Enter student name"id="name"/></td></tr>
+
+
+            <tr><th>ENTER PHYSICS MARKS</th><td>
+            <input type="text"placeholder="Enter Physics Marks"id="phy"/></td></tr>
+
+
+            <tr><th>ENTER CHEMISTRY MARKS</th><td>
+            <input type="text"placeholder="Enter Chemistry Marks"id="che"/></td></tr>
+
+
+            <tr><th>ENTER MATHS MARKS</th><td>
+            <input type="text"placeholder="Enter Maths Marks"id="math"/></td></tr>
+
+
+            <tr><th>ENTER HINDI MARKS</th><td>
+            <input type="text"placeholder="Enter Hindi Marks"id="hin"/></td></tr>
+
+
+           <tr><th>ENTER ENGLISH MARKS</th><td>
+            <input type="text"placeholder="Enter English Marks"id="eng"/></td></tr>
+
+
+            <tr><td><input type="button"id="btn"value ="Check result"onclick="res()"></td></tr>
+
+        </table>
+
+        </div>
+
+        <div id="student">
+            <span id="studentName"></span>
+        </div>
+
+        <div id="result"></div>
+
+        </div>
+</body>
+</html>
